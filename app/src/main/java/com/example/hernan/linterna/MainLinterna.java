@@ -11,6 +11,7 @@ import android.widget.Toast;
 public class MainLinterna extends AppCompatActivity {
     Button boton;
     Camera camera;
+    boolean encendido = false;
 
 
     @Override
@@ -23,19 +24,22 @@ public class MainLinterna extends AppCompatActivity {
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (boton.getText().equals(R.string.encender)) {
-                    Toast.makeText(getApplicationContext(), "Encendiendo", Toast.LENGTH_LONG).show();
+                if (encendido) {
+                    Toast.makeText(getApplicationContext(), R.string.toastApagado, Toast.LENGTH_LONG).show();
+                    camera.stopPreview();
+                    camera.release();
+                    boton.setText(R.string.encender);
+                    encendido = false;
+                } else {
+                    Toast.makeText(getApplicationContext(), R.string.toastEncendido, Toast.LENGTH_LONG).show();
                     camera = Camera.open();
                     Camera.Parameters parameters = camera.getParameters();
                     parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
                     camera.setParameters(parameters);
                     camera.startPreview();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Apagando", Toast.LENGTH_LONG).show();
-                    camera.stopPreview();
-                    camera.release();
+                    boton.setText(R.string.apagar);
+                    encendido = true;
                 }
-
             }
         });
     }

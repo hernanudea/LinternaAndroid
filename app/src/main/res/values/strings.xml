@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Linterna</string>
-    <string name="encender">Encender.</string>
+    <string name="encender">Encender!</string>
+    <string name="apagar">Apagar!</string>
+    <string name="toastEncendido">La linterna está encendida!</string>
+    <string name="toastApagado">La linterna está apagada!</string>
 </resources>
